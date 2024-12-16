@@ -9,10 +9,30 @@
   <style>
     
   </style>
+  <script>
+    function ready() {
+      var videoEl = document.getElementById("videoElement");
+      videoEl.onpause = () => { 
+        videoEl.play(); 
+      }
+
+      videoEl.onratechange = (event) => {
+        console.log(event)
+        console.log("The playback rate changed.");
+        videoEl.playbackRate = 1;
+      };
+
+      video.ondurationchange = (event) => {
+        console.log("Not sure why, but the duration of the video has changed.");
+      };
+    }
+  
+    document.addEventListener("DOMContentLoaded", ready);
+  </script>
 </head>
 <body>
   <div>
-    <video id='video' controls="controls" preload='none' width="600" poster="https://assets.codepen.io/32795/poster.png">
+    <video id='videoElement' controls="controls" preload='none' width="100%" poster="https://assets.codepen.io/32795/poster.png">
       <source id='mp4' src="http://media.w3.org/2010/05/sintel/trailer.mp4" type='video/mp4' />
       <source id='webm' src="http://media.w3.org/2010/05/sintel/trailer.webm" type='video/webm' />
       <source id='ogv' src="http://media.w3.org/2010/05/sintel/trailer.ogv" type='video/ogg' />

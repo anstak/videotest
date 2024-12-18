@@ -11,6 +11,7 @@
   </style>
   <script>
     function ready() {
+      var time;
       var videoEl = document.getElementById("videoElement");
       videoEl.onpause = () => { 
         videoEl.play(); 
@@ -22,9 +23,29 @@
         videoEl.playbackRate = 1;
       };
 
-      video.ondurationchange = (event) => {
+      videoEl.ondurationchange = (event) => {
         console.log("Not sure why, but the duration of the video has changed.");
       };
+
+
+      videoEl.ontimeupdate = (event) => {
+        setTimeout(() => {
+          time = videoEl.currentTime
+          console.log(time)
+        }, 10);
+      };
+
+      videoEl.onseeking = (event) => {
+        //console.log(videoEl.currentTime)
+        if (videoEl.currentTime > time) {
+          videoEl.currentTime = time
+        }
+      };
+
+      // videoEl.onseeked = (event) => {
+      //   console.log(videoEl.currentTime)
+      // };
+      
     }
   
     document.addEventListener("DOMContentLoaded", ready);
